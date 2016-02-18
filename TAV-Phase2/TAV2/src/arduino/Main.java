@@ -84,7 +84,6 @@ public class Main {
 		runSensorData rsd = new runSensorData();
 		runReadSpeed rrs = new runReadSpeed();
 		runInput ri = new runInput();
-		display.main(args);
 		rsd.start();
 		rrs.start();
 		ri.start();
