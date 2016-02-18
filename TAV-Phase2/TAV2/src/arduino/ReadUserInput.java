@@ -2,12 +2,12 @@ package arduino;
 
 import java.util.Scanner;
 
-public class readUserInput {
+public class ReadUserInput {
 	
 	Scanner sc;
 	String globalInput;
 	
-	public readUserInput() {
+	public ReadUserInput() {
 		sc = new Scanner(System.in);
 	}
 	

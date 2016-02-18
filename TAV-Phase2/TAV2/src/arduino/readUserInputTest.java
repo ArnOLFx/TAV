@@ -10,7 +10,7 @@ import org.junit.Assert;
 public class readUserInputTest {
 
 	//Instantiating the readUserInput class
-	readUserInput input;
+	ReadUserInput input;
 	//Scanner for getting expected input
 	Scanner in;
 	
@@ -23,7 +23,7 @@ public class readUserInputTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		input = new readUserInput();
+		input = new ReadUserInput();
 		in = new Scanner(System.in);
 	}
 
