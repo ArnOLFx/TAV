@@ -49,11 +49,17 @@ class runReadSpeed implements Runnable {
 }
 
 class runInput implements Runnable {
+	double[] sensorData = { 0, 0, 0 };
+	
 	ReadUserInput readInput = new ReadUserInput();
+	SendSensorData sendData = new SendSensorData();
+	WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
 
 	@Override
 	public void run() {
+		while(true){
 			readInput.getUserInput();
+		}
 	}
 
 	public void start() {
@@ -68,13 +74,19 @@ class runInput implements Runnable {
  *
  */
 public class Main {
+	
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		TestDisplay display = new TestDisplay();
 		runSensorData rsd = new runSensorData();
 		runReadSpeed rrs = new runReadSpeed();
+		runInput ri = new runInput();
+		display.main(args);
 		rsd.start();
 		rrs.start();
+		ri.start();
 	}
 }
