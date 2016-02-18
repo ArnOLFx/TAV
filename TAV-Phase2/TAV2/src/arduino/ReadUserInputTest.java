@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import org.junit.Assert;
 
-public class readUserInputTest {
+public class ReadUserInputTest {
 
 	//Instantiating the readUserInput class
 	ReadUserInput input;

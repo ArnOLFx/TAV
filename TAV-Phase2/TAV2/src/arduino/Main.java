@@ -49,21 +49,11 @@ class runReadSpeed implements Runnable {
 }
 
 class runInput implements Runnable {
-	double[] sensorData = { 0, 0, 0 };
-
-	SendSensorData sendData = new SendSensorData();
-	WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
+	ReadUserInput readInput = new ReadUserInput();
 
 	@Override
 	public void run() {
-		while (true) {
-			writeBuffer.sendByteToBuffer(29, sendData.createPacket(sensorData[0], sensorData[1], sensorData[2]));
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+			readInput.getUserInput();
 	}
 
 	public void start() {
