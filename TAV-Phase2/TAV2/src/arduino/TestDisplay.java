@@ -36,7 +36,7 @@ public class TestDisplay {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the application
 	 */
 	public TestDisplay() {
 		initialize();
