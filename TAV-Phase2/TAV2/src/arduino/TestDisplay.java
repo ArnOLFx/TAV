@@ -12,27 +12,21 @@ import javax.swing.JTextField;
 
 public class TestDisplay {
 
-	private JFrame frame;
+	public JFrame frame;
 	public JTextField TSent;
 	public JTextField USent;
 	public JTextField ISent;
 	public JTextField TRec;
 	public JTextField SRec;
+	private JTextField InputT;
+	private JTextField InputU;
+	private JTextField InputI;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TestDisplay window = new TestDisplay();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
 	}
 
 	/**
@@ -56,49 +50,94 @@ public class TestDisplay {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
+		JLabel lblUserInput = new JLabel("Input values(editable)");
+		lblUserInput.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 16));
+		lblUserInput.setBounds(30, 20, 250, 15);
+		panel.add(lblUserInput);
+		
+		JLabel lblInputT = new JLabel("Torque:");
+		lblInputT.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 14));
+		lblInputT.setBounds(30, 49, 86, 15);
+		panel.add(lblInputT);
+		
+		JLabel lblInputU = new JLabel("Ultra distance:");
+		lblInputU.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 14));
+		lblInputU.setBounds(30, 69, 133, 15);
+		panel.add(lblInputU);
+		
+		JLabel lblInputI = new JLabel("IR distance");
+		lblInputI.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 14));
+		lblInputI.setBounds(30, 89, 133, 15);
+		panel.add(lblInputI);
+		
 		JLabel lblSent = new JLabel("Sent values");
 		lblSent.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 16));
-		lblSent.setBounds(35, 30, 105, 15);
+		lblSent.setBounds(30, 147, 105, 15);
 		panel.add(lblSent);
 		
 		JLabel lblTSent = new JLabel("Torque:");
 		lblTSent.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 14));
-		lblTSent.setBounds(35, 60, 86, 15);
+		lblTSent.setBounds(30, 177, 86, 15);
 		panel.add(lblTSent);
 		
 		JLabel lblUSent = new JLabel("Ultra distance:");
 		lblUSent.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 14));
-		lblUSent.setBounds(35, 80, 133, 15);
+		lblUSent.setBounds(30, 197, 133, 15);
 		panel.add(lblUSent);
 		
 		JLabel lblISent = new JLabel("IR distance");
 		lblISent.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 14));
-		lblISent.setBounds(35, 100, 133, 15);
+		lblISent.setBounds(30, 217, 133, 15);
 		panel.add(lblISent);
 		
 		JLabel lblReceived = new JLabel("Received values");
 		lblReceived.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 16));
-		lblReceived.setBounds(35, 151, 164, 15);
+		lblReceived.setBounds(240, 147, 147, 15);
 		panel.add(lblReceived);
 		
 		JLabel lblRec = new JLabel("Torque:");
 		lblRec.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 14));
-		lblRec.setBounds(35, 180, 86, 15);
+		lblRec.setBounds(240, 177, 86, 15);
 		panel.add(lblRec);
 		
 		JLabel lblSRec = new JLabel("Speed:");
 		lblSRec.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 14));
-		lblSRec.setBounds(35, 200, 86, 15);
+		lblSRec.setBounds(240, 197, 86, 15);
 		panel.add(lblSRec);
+		
+				
+		InputT = new JTextField();
+		InputT.setText("1");
+		InputT.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
+		InputT.setColumns(10);
+		InputT.setBackground(Color.WHITE);
+		InputT.setBounds(166, 49, 50, 19);
+		panel.add(InputT);
+		
+		InputU = new JTextField();
+		InputU.setText("1");
+		InputU.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
+		InputU.setColumns(10);
+		InputU.setBackground(Color.WHITE);
+		InputU.setBounds(166, 69, 50, 19);
+		panel.add(InputU);
+		
+		InputI = new JTextField();
+		InputI.setText("1");
+		InputI.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
+		InputI.setColumns(10);
+		InputI.setBackground(Color.WHITE);
+		InputI.setBounds(166, 89, 50, 19);
+		panel.add(InputI);
 		
 		TSent = new JTextField();
 		TSent.setEditable(false);
 		TSent.setBackground(UIManager.getColor("Button.shadow"));
 		TSent.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
-		TSent.setBounds(171, 60, 114, 19);
+		TSent.setBounds(166, 177, 50, 19);
 		panel.add(TSent);
 		TSent.setColumns(10);
-		TSent.setText("0.42");
+		TSent.setText("1");
 
 		
 		USent = new JTextField();
@@ -106,9 +145,9 @@ public class TestDisplay {
 		USent.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
 		USent.setColumns(10);
 		USent.setBackground(UIManager.getColor("Button.select"));
-		USent.setBounds(171, 80, 114, 19);
+		USent.setBounds(166, 197, 50, 19);
 		panel.add(USent);
-		USent.setText("8.17");
+		USent.setText("1");
 
 		
 		ISent = new JTextField();
@@ -116,18 +155,18 @@ public class TestDisplay {
 		ISent.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
 		ISent.setColumns(10);
 		ISent.setBackground(UIManager.getColor("Button.select"));
-		ISent.setBounds(171, 100, 114, 19);
+		ISent.setBounds(166, 217, 50, 19);
 		panel.add(ISent);
-		ISent.setText("4.56");
+		ISent.setText("1");
 		
 		TRec = new JTextField();
 		TRec.setEditable(false);
 		TRec.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
 		TRec.setColumns(10);
 		TRec.setBackground(UIManager.getColor("Button.select"));
-		TRec.setBounds(171, 180, 114, 19);
+		TRec.setBounds(376, 177, 50, 19);
 		panel.add(TRec);
-		TRec.setText("0.56");
+		TRec.setText("1");
 
 		
 		SRec = new JTextField();
@@ -135,9 +174,11 @@ public class TestDisplay {
 		SRec.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
 		SRec.setColumns(10);
 		SRec.setBackground(UIManager.getColor("Button.select"));
-		SRec.setBounds(171, 200, 114, 19);
+		SRec.setBounds(376, 197, 50, 19);
 		panel.add(SRec);
-		SRec.setText("14.89");
+		SRec.setText("1");
+		
+		
 
 	}
 }
