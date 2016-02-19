@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ReadUserInput {
 	
 	Scanner sc;
-	String globalInput;
+	private double torque, ultra, ir;
 	
 	public ReadUserInput() {
 		sc = new Scanner(System.in);
@@ -31,7 +31,7 @@ public class ReadUserInput {
 	double getUserInput() {
 		String input = "";
 		
-		System.out.println("Enter input: ");
+		System.out.print("\nEnter input (ex t0.5): ");
 		
 		//implemented to pass test case 1, to get the input from the user.
 		input = sc.nextLine();
@@ -40,32 +40,81 @@ public class ReadUserInput {
 		 * Added switch case with string -> double conversion to satisfy test cases 1-3, which expect a double value as output from this method.
 		 * Also added a default case to return an error message, in this case its 99 (meaning error).
 		 * Also added a check to see if the values are in range of acceptable values.
+		 * Also added a check to see if there exists a value after the letter.
 		 */
 		switch(input.charAt(0)) {
 		case 't':
-			double torque = Double.parseDouble(input.substring(1, input.length()));
+			double torque;
+			try {
+				
+				if (input.substring(1, input.length()).isEmpty()) {
+					return 99.0;
+				}
+				
+				torque = Double.parseDouble(input.substring(1, input.length()));
+			} catch(NumberFormatException e) {
+				e.printStackTrace();
+				return 99.0;
+			}
 			
 			if (torque < -1 || torque > 1) {
 				return 99.0;
 			} else {
+				this.torque = torque;
 				return (torque);
 			}
 		case 'u':
-			double ultra = Double.parseDouble(input.substring(1, input.length()));
+			double ultra;
+			try {
+				
+				if (input.substring(1, input.length()).isEmpty()) {
+					return 99.0;
+				}
+				
+				ultra = Double.parseDouble(input.substring(1, input.length()));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				return 99.0;
+			}
 			if (ultra < 0 || ultra > 10) {
 				return 99.0;
 			} else {
+				this.ultra = ultra;
 				return (ultra);
 			}
 		case 'i':
-			double ir = Double.parseDouble(input.substring(1, input.length()));
+			double ir;
+			try {
+				
+				if (input.substring(1, input.length()).isEmpty()) {
+					return 99.0;
+				}
+				
+				ir = Double.parseDouble(input.substring(1, input.length()));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				return 99.0;
+			}
 			if (ir < 0 || ir > 10) {
 				return 99.0;
 			} else {
+				this.ir = ir;
 				return (ir);
 			}
 		default:
 			return 99.0;
 		}
+	}
+	
+	public double getTorque() {
+		return torque;
+	}
+	
+	public double getUltra() {
+		return ultra;
+	}
+	
+	public double getIr() {
+		return ir;
 	}
 }
