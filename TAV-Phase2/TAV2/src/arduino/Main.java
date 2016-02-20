@@ -60,7 +60,7 @@ class runInput implements Runnable {
 	@Override
 	public void run() {
 		while(true){
-			readInput.getUserInput();
+			//readInput.getUserInput();
 		}
 	}
 

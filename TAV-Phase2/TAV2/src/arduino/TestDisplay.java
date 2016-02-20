@@ -1,17 +1,21 @@
 package arduino;
-import java.awt.EventQueue;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import java.awt.Color;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import javax.swing.UIManager;
-import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class TestDisplay {
 
+	
+	ReadUserInput read;
+	
 	public JFrame frame;
 	public JTextField TSent;
 	public JTextField USent;
@@ -33,6 +37,7 @@ public class TestDisplay {
 	 * Create the application
 	 */
 	public TestDisplay() {
+		read = new ReadUserInput();
 		initialize();
 	}
 
@@ -114,6 +119,19 @@ public class TestDisplay {
 		InputT.setBounds(166, 49, 50, 19);
 		panel.add(InputT);
 		
+		InputT.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				double torque = read.getUserInputTorque(InputT.getText());
+				
+				TSent.setText(String.valueOf(torque));
+				
+			}
+			
+		});
+		
 		InputU = new JTextField();
 		InputU.setText("1");
 		InputU.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
@@ -122,6 +140,19 @@ public class TestDisplay {
 		InputU.setBounds(166, 69, 50, 19);
 		panel.add(InputU);
 		
+		InputU.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				double ultra = read.getUserInputUltra(InputU.getText());
+				
+				USent.setText(String.valueOf(ultra));
+				
+			}
+			
+		});
+		
 		InputI = new JTextField();
 		InputI.setText("1");
 		InputI.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 15));
@@ -129,6 +160,19 @@ public class TestDisplay {
 		InputI.setBackground(Color.WHITE);
 		InputI.setBounds(166, 89, 50, 19);
 		panel.add(InputI);
+		
+		InputI.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				double ir = read.getUserInputIr(InputI.getText());
+				
+				ISent.setText(String.valueOf(ir));
+				
+			}
+			
+		});
 		
 		TSent = new JTextField();
 		TSent.setEditable(false);

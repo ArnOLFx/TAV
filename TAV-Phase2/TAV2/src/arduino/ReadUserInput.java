@@ -28,13 +28,13 @@ public class ReadUserInput {
 	 *  test-case 3: check if user input (a ir distance value) is what the program expected.
 	 *  
 	*/
-	double getUserInput() {
-		String input = "";
+	double getUserInputTorque(String input) {
+		//String input = "";
 		
-		System.out.print("\nEnter input (ex t0.5): ");
+		//System.out.print("\nEnter input (ex t0.5): ");
 		
 		//implemented to pass test case 1, to get the input from the user.
-		input = sc.nextLine();
+		//input = sc.nextLine();
 		
 		/**
 		 * Added switch case with string -> double conversion to satisfy test cases 1-3, which expect a double value as output from this method.
@@ -42,68 +42,74 @@ public class ReadUserInput {
 		 * Also added a check to see if the values are in range of acceptable values.
 		 * Also added a check to see if there exists a value after the letter.
 		 */
-		switch(input.charAt(0)) {
-		case 't':
-			double torque;
-			try {
-				
-				if (input.substring(1, input.length()).isEmpty()) {
-					return 99.0;
-				}
-				
-				torque = Double.parseDouble(input.substring(1, input.length()));
-			} catch(NumberFormatException e) {
-				e.printStackTrace();
+	
+		double torque;
+		
+		try {
+			
+			if (input.substring(0, input.length()).isEmpty()) {
 				return 99.0;
 			}
 			
-			if (torque < -1 || torque > 1) {
-				return 99.0;
-			} else {
-				this.torque = torque;
-				return (torque);
-			}
-		case 'u':
-			double ultra;
-			try {
-				
-				if (input.substring(1, input.length()).isEmpty()) {
-					return 99.0;
-				}
-				
-				ultra = Double.parseDouble(input.substring(1, input.length()));
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				return 99.0;
-			}
-			if (ultra < 0 || ultra > 10) {
-				return 99.0;
-			} else {
-				this.ultra = ultra;
-				return (ultra);
-			}
-		case 'i':
-			double ir;
-			try {
-				
-				if (input.substring(1, input.length()).isEmpty()) {
-					return 99.0;
-				}
-				
-				ir = Double.parseDouble(input.substring(1, input.length()));
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				return 99.0;
-			}
-			if (ir < 0 || ir > 10) {
-				return 99.0;
-			} else {
-				this.ir = ir;
-				return (ir);
-			}
-		default:
+			torque = Double.parseDouble(input.substring(0, input.length()));
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
 			return 99.0;
 		}
+		
+		if (torque < -1 || torque > 1) {
+			return 99.0;
+		} else {
+			this.torque = torque;
+			return (torque);
+		}
+	}
+	
+	public double getUserInputUltra(String input) {
+		
+		double ultra;
+		
+		try {
+			
+			if (input.substring(0, input.length()).isEmpty()) {
+				return 99.0;
+			}
+			
+			ultra = Double.parseDouble(input.substring(0, input.length()));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			return 99.0;
+		}
+		if (ultra < 0 || ultra > 10) {
+			return 99.0;
+		} else {
+			this.ultra = ultra;
+			return (ultra);
+		}
+	}
+	
+	public double getUserInputIr(String input) {
+		
+		double ir;
+		
+		try {
+			
+			if (input.substring(0, input.length()).isEmpty()) {
+				return 99.0;
+			}
+			
+			ir = Double.parseDouble(input.substring(0, input.length()));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			return 99.0;
+		}
+		if (ir < 0 || ir > 10) {
+			return 99.0;
+		} else {
+			this.ir = ir;
+			return (ir);
+		}
+		
 	}
 	
 	public double getTorque() {
