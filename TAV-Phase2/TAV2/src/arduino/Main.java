@@ -2,15 +2,28 @@ package arduino;
 
 
 class runSensorData implements Runnable {
-	double[] sensorData = { 0, 0, 0 };
-
+	double t=0,u=0,i=0; 		// varaibles for torque, ultra distance and IR distance to be sent to buffer.
+	ReadUserInput readInput = new ReadUserInput();
 	SendSensorData sendData = new SendSensorData();
 	WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
 
 	@Override
 	public void run() {
 		while (true) {
-			writeBuffer.sendByteToBuffer(29, sendData.createPacket(sensorData[0], sensorData[1], sensorData[2]));
+			if(readInput.getTorque()!=99.0){
+				t=readInput.getTorque();
+			}
+			if(readInput.getUltra()!=99.0){
+				u=readInput.getUltra();
+			}
+			if(readInput.getIr()!=99.0){
+				i=readInput.getIr();
+			}
+			System.out.println("torque: "+t);
+			System.out.println("ultra: "+u);
+			System.out.println("IR: "+i);
+
+			writeBuffer.sendByteToBuffer(29, sendData.createPacket(t, u, i));				
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -56,40 +69,7 @@ class runReadSpeed implements Runnable {
  *
  */
 
-class runInput implements Runnable {
-	double[] sensorData = { 0, 0, 0 };
-	
-	ReadUserInput readInput = new ReadUserInput();
-	SendSensorData sendData = new SendSensorData();
-	WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
 
-	@Override
-	public void run() {
-		while(true){
-			
-			/**
-			 * Added call to buffer in order to finally get the recieved values for
-			 * torque, ultra and ir.
-			 */
-			
-			if (readInput.getTorque() != 0.0 && readInput.getUltra() != 0.0 
-					&& readInput.getIr() != 0.0) {
-				
-				if (writeBuffer.sendByteToBuffer(29, sendData.createPacket(
-						readInput.getTorque(), readInput.getUltra(), readInput.getIr())) != 1) {
-					//Values sent to input buffer, can perform "operation success" message.
-				} else {
-					//There was an error, handle it.
-				}
-			}
-		}
-	}
-
-	public void start() {
-		Thread t = new Thread(this);
-		t.start();
-	}
-}
 
 class runDisplay implements Runnable {
 	TestDisplay display= new TestDisplay();
@@ -138,16 +118,9 @@ public class Main {
 		runDisplay rd = new runDisplay();
 		runSensorData rsd = new runSensorData();
 		runReadSpeed rrs = new runReadSpeed();
-		runInput ri = new runInput();
 		rsd.start();
-		rrs.start();
-		ri.start();
-		
+		rrs.start();		
 		rd.start();
 	}
 
-	private static String toString(Double t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

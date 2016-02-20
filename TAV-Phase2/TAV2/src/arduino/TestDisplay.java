@@ -15,7 +15,6 @@ public class TestDisplay {
 
 	
 	ReadUserInput read;
-	SendSensorData send;
 	
 	private double torque, ultra, ir;
 	
@@ -136,7 +135,7 @@ public class TestDisplay {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				double torque = read.getUserInputTorque(InputT.getText());
-				
+				System.out.println(torque);
 				TSent.setText(String.valueOf(torque));
 				
 				setTorque(torque);
