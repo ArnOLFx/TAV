@@ -36,7 +36,9 @@ public class ReadUserInputTest {
 					//torque
 		double expected = 0.5;
 		
-		double actual = input.getUserInput();
+		System.out.print("\nEnter torque value (0.5): ");
+		
+		double actual = input.getUserInputTorque(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
 	}
@@ -50,7 +52,9 @@ public class ReadUserInputTest {
 					//ul
 		double expected = 5;
 		
-		double actual = input.getUserInput();
+		System.out.print("\nEnter ultra value (5): ");
+		
+		double actual = input.getUserInputUltra(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
 	}
@@ -64,7 +68,9 @@ public class ReadUserInputTest {
 					//ir
 		double expected = 5;
 		
-		double actual = input.getUserInput();
+		System.out.print("\nEnter ir value (5): ");
+		
+		double actual = input.getUserInputIr(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
 	}
@@ -78,7 +84,9 @@ public class ReadUserInputTest {
 					//torque
 		double expected = 99.0;
 		
-		double actual = input.getUserInput();
+		System.out.print("\nEnter torque value (5): ");
+		
+		double actual = input.getUserInputTorque(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
 	}
@@ -92,7 +100,9 @@ public class ReadUserInputTest {
 					//ultra
 		double expected = 99.0;
 		
-		double actual = input.getUserInput();
+		System.out.print("\nEnter ultra value (50): ");
+		
+		double actual = input.getUserInputUltra(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
 	}
@@ -106,7 +116,9 @@ public class ReadUserInputTest {
 					//ir
 		double expected = 99.0;
 		
-		double actual = input.getUserInput();
+		System.out.print("\nEnter ultra value (50): ");
+		
+		double actual = input.getUserInputIr(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
 	}

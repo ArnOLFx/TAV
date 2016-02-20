@@ -15,6 +15,9 @@ public class TestDisplay {
 
 	
 	ReadUserInput read;
+	SendSensorData send;
+	
+	private double torque, ultra, ir;
 	
 	public JFrame frame;
 	public JTextField TSent;
@@ -37,6 +40,9 @@ public class TestDisplay {
 	 * Create the application
 	 */
 	public TestDisplay() {
+		torque = 0.0;
+		ultra = 0.0;
+		ir = 0.0;
 		read = new ReadUserInput();
 		initialize();
 	}
@@ -119,6 +125,11 @@ public class TestDisplay {
 		InputT.setBounds(166, 49, 50, 19);
 		panel.add(InputT);
 		
+		/**
+		 * Variables for torque, ultra and ir.
+		 * And listeners for their respective text fields.
+		 */
+		
 		InputT.addActionListener(new ActionListener() {
 
 			@Override
@@ -127,6 +138,8 @@ public class TestDisplay {
 				double torque = read.getUserInputTorque(InputT.getText());
 				
 				TSent.setText(String.valueOf(torque));
+				
+				setTorque(torque);
 				
 			}
 			
@@ -149,6 +162,8 @@ public class TestDisplay {
 				
 				USent.setText(String.valueOf(ultra));
 				
+				setUltra(ultra);
+				
 			}
 			
 		});
@@ -169,6 +184,8 @@ public class TestDisplay {
 				double ir = read.getUserInputIr(InputI.getText());
 				
 				ISent.setText(String.valueOf(ir));
+				
+				setIr(ir);
 				
 			}
 			
@@ -224,5 +241,33 @@ public class TestDisplay {
 		
 		
 
+	}
+	
+	/**
+	 * Getter and setter methods for torque, ultra and ir.
+	 */
+	
+	private void setTorque(double torque) {
+		this.torque = torque;
+	}
+	
+	private void setUltra(double ultra) {
+		this.ultra = ultra;
+	}
+	
+	private void setIr(double ir) {
+		this.ir = ir;
+	}
+	
+	public double getTorque() {
+		return torque;
+	}
+	
+	public double getUltra() {
+		return ultra;
+	}
+	
+	public double getIr() {
+		return ir;
 	}
 }

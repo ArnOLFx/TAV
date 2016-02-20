@@ -1,6 +1,5 @@
 package arduino;
 
-import java.awt.EventQueue;
 
 class runSensorData implements Runnable {
 	double[] sensorData = { 0, 0, 0 };
@@ -50,6 +49,13 @@ class runReadSpeed implements Runnable {
 
 }
 
+/**
+ * 
+ * This might not be needed anymore.
+ * Do this exact thing in runSensorData instead.
+ *
+ */
+
 class runInput implements Runnable {
 	double[] sensorData = { 0, 0, 0 };
 	
@@ -60,7 +66,22 @@ class runInput implements Runnable {
 	@Override
 	public void run() {
 		while(true){
-			//readInput.getUserInput();
+			
+			/**
+			 * Added call to buffer in order to finally get the recieved values for
+			 * torque, ultra and ir.
+			 */
+			
+			if (readInput.getTorque() != 0.0 && readInput.getUltra() != 0.0 
+					&& readInput.getIr() != 0.0) {
+				
+				if (writeBuffer.sendByteToBuffer(29, sendData.createPacket(
+						readInput.getTorque(), readInput.getUltra(), readInput.getIr())) != 1) {
+					//Values sent to input buffer, can perform "operation success" message.
+				} else {
+					//There was an error, handle it.
+				}
+			}
 		}
 	}
 
@@ -68,8 +89,6 @@ class runInput implements Runnable {
 		Thread t = new Thread(this);
 		t.start();
 	}
-	
-
 }
 
 class runDisplay implements Runnable {
@@ -104,10 +123,7 @@ class runDisplay implements Runnable {
 		public void updateSRec(String string){
 			display.SRec.setText(string);
 		}
-
 }
-
-
 /**
  * @author group3
  *
@@ -128,13 +144,6 @@ public class Main {
 		ri.start();
 		
 		rd.start();
-		
-		
-		
-		
-		
-	
-		
 	}
 
 	private static String toString(Double t) {
