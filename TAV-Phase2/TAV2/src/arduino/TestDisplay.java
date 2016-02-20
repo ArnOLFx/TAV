@@ -133,13 +133,13 @@ public class TestDisplay {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
 				double torque = read.getUserInputTorque(InputT.getText());
-				System.out.println(torque);
-				TSent.setText(String.valueOf(torque));
-				
-				setTorque(torque);
-				
+				if(torque==99){
+					System.out.println("Wrong torque value input");
+				}else{
+					TSent.setText(String.valueOf(torque));
+					setTorque(torque);
+				}
 			}
 			
 		});
@@ -158,11 +158,12 @@ public class TestDisplay {
 			public void actionPerformed(ActionEvent e) {
 				
 				double ultra = read.getUserInputUltra(InputU.getText());
-				
-				USent.setText(String.valueOf(ultra));
-				
-				setUltra(ultra);
-				
+				if(ultra==99){
+					System.out.println("Wrong ultra value input");
+				}else{
+					USent.setText(String.valueOf(ultra));
+					setUltra(ultra);
+				}
 			}
 			
 		});
@@ -181,11 +182,12 @@ public class TestDisplay {
 			public void actionPerformed(ActionEvent e) {
 				
 				double ir = read.getUserInputIr(InputI.getText());
-				
-				ISent.setText(String.valueOf(ir));
-				
-				setIr(ir);
-				
+				if(ir==99){
+					System.out.println("Wrong IR value input");
+				}else{
+					ISent.setText(String.valueOf(ir));
+					setIr(ir);
+				}			
 			}
 			
 		});
