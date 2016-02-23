@@ -15,7 +15,7 @@ public static void main(String[] args) {
 	 * Take out final if compliance level is higher than 1.7
 	 */
 /*	
-	final TestDisplay display = new TestDisplay();
+	final UserInterface display = new UserInterface();
 	final SendSensorData sendData = new SendSensorData();
 	final WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
 	//final ReadFromOutputBuffer readBuffer = new ReadFromOutputBuffer();

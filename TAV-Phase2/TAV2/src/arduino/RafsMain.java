@@ -1,5 +1,5 @@
 package arduino;
-
+/*
 class runSensorData implements Runnable {
 	double[] sensorData = { 0, 0, 0 };
 
@@ -74,14 +74,16 @@ class runInput implements Runnable {
  * @author group3
  *
  */
+/*
 public class RafsMain {
 	
 	
 	/**
 	 * @param args
 	 */
+/*
 	public static void main(String[] args) {
-		TestDisplay display = new TestDisplay();
+		UserInterface display = new UserInterface();
 		runSensorData rsd = new runSensorData();
 		runReadSpeed rrs = new runReadSpeed();
 		//runInput ri = new runInput();
@@ -91,3 +93,4 @@ public class RafsMain {
 		//ri.start();
 	}
 }
+*/

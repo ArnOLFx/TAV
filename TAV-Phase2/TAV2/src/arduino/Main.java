@@ -54,7 +54,7 @@ class runInput implements Runnable {
 	
 	WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
 	SendSensorData sendData = new SendSensorData();
-	TestDisplay display = new TestDisplay();
+	UserInterface display = new UserInterface();
 
 	@Override
 	public void run() {
@@ -99,7 +99,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//TestDisplay display = new TestDisplay();
+		//UserInterface display = new UserInterface();
 		runSensorData rsd = new runSensorData();
 		runReadSpeed rrs = new runReadSpeed();
 		runInput ri = new runInput();

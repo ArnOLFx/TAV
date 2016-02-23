@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-public class TestDisplay {
+public class UserInterface {
 
 	
 	ReadUserInput read;
@@ -38,7 +38,7 @@ public class TestDisplay {
 	/**
 	 * Create the application
 	 */
-	public TestDisplay() {
+	public UserInterface() {
 		torque = 0.0;
 		ultra = 0.0;
 		ir = 0.0;

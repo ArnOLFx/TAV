@@ -12,8 +12,8 @@ public class ReadUserInputTest {
 
 	//Instantiating the readUserInput class
 	ReadUserInput input;
-	//Instantiating the TestDisplay class
-	TestDisplay display;
+	//Instantiating the UserInterface class
+	UserInterface display;
 	//Scanner for getting expected input
 	Scanner in;
 	
@@ -27,7 +27,7 @@ public class ReadUserInputTest {
 	@Before
 	public void setUp() throws Exception {
 		input = new ReadUserInput();
-		display = mock(TestDisplay.class);
+		display = mock(UserInterface.class);
 		
 		in = new Scanner(System.in);
 	}
