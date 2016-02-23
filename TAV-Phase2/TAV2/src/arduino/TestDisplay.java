@@ -246,9 +246,10 @@ public class TestDisplay {
 	
 	/**
 	 * Getter and setter methods for torque, ultra and ir.
+	 * Made setters public for testing
 	 */
 	
-	private void setTorque(double torque) {
+	public void setTorque(double torque) {
 		this.torque = torque;
 	}
 	

@@ -10,11 +10,16 @@ public class Main {
 	 */
 public static void main(String[] args) {
 	
-	TestDisplay display= new TestDisplay();
-	SendSensorData sendData = new SendSensorData();
-	WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
-	ReadFromOutputBuffer readBuffer = new ReadFromOutputBuffer();
-	ReadSpeedAndTorque readSpeed = new ReadSpeedAndTorque();
+	/**
+	 * Added final for compliance level <1.8
+	 * Take out final if compliance level is higher than 1.7
+	 */
+	
+	final TestDisplay display = new TestDisplay();
+	final SendSensorData sendData = new SendSensorData();
+	final WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
+	//final ReadFromOutputBuffer readBuffer = new ReadFromOutputBuffer();
+	final ReadSpeedAndTorque readSpeed = new ReadSpeedAndTorque();
 	
 //******** THREAD FOR THE GUI   **********
 	Thread rd = new Thread(new Runnable() {
@@ -72,9 +77,5 @@ public static void main(String[] args) {
 	});
 
 	receiveFromOutput.start();
-	
-	
-	
-}
-
+	}
 }

@@ -2,15 +2,18 @@ package arduino;
 
 import java.util.Scanner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.junit.Assert;
+import static org.mockito.Mockito.*;
 
 public class ReadUserInputTest {
 
 	//Instantiating the readUserInput class
 	ReadUserInput input;
+	//Instantiating the TestDisplay class
+	TestDisplay display;
 	//Scanner for getting expected input
 	Scanner in;
 	
@@ -24,6 +27,8 @@ public class ReadUserInputTest {
 	@Before
 	public void setUp() throws Exception {
 		input = new ReadUserInput();
+		display = mock(TestDisplay.class);
+		
 		in = new Scanner(System.in);
 	}
 
@@ -34,13 +39,21 @@ public class ReadUserInputTest {
 	@Test
 	public void test1() {
 					//torque
+		
+		System.out.print("\nEnter torque value (0.5): ");
+		
+		display.setTorque(Double.parseDouble(in.nextLine()));
+		
+		when(display.getTorque()).thenReturn(0.5);
+		
+		/* WHAT WE HAD BEFORE MOCKITO
 		double expected = 0.5;
 		
 		System.out.print("\nEnter torque value (0.5): ");
 		
 		double actual = input.getUserInputTorque(in.nextLine());
 		
-		Assert.assertEquals(expected, actual, 0);
+		Assert.assertEquals(expected, actual, 0);*/
 	}
 	
 	/**
@@ -121,5 +134,15 @@ public class ReadUserInputTest {
 		double actual = input.getUserInputIr(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
+	}
+	
+	/**
+	 * Test case 3: reads data from user and tests if the output is equal to the input
+	 * In this case we look for irDistance and if it is in bounds
+	 */
+	@Test
+	public void test7() {
+					//ir
+		//Assert.assertEquals(5, actual)
 	}
 }
