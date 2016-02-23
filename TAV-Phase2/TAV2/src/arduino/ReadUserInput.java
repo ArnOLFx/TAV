@@ -112,6 +112,13 @@ public class ReadUserInput {
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 *
+	 *Methods for getting the values of torque, ultra and ir.
+	 */
+	
 	public double getTorque() {
 		return torque;
 	}

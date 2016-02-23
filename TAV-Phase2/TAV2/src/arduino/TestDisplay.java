@@ -49,6 +49,7 @@ public class TestDisplay {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	//Can be changed to return JFrame for testing...
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.GRAY);
@@ -134,7 +135,7 @@ public class TestDisplay {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				double torque = read.getUserInputTorque(InputT.getText());
-				if(torque==99){
+				if (torque == 99.0){
 					System.out.println("Wrong torque value input");
 				}else{
 					TSent.setText(String.valueOf(torque));
@@ -158,7 +159,7 @@ public class TestDisplay {
 			public void actionPerformed(ActionEvent e) {
 				
 				double ultra = read.getUserInputUltra(InputU.getText());
-				if(ultra==99){
+				if (ultra == 99.0){
 					System.out.println("Wrong ultra value input");
 				}else{
 					USent.setText(String.valueOf(ultra));
@@ -182,7 +183,7 @@ public class TestDisplay {
 			public void actionPerformed(ActionEvent e) {
 				
 				double ir = read.getUserInputIr(InputI.getText());
-				if(ir==99){
+				if (ir == 99.0){
 					System.out.println("Wrong IR value input");
 				}else{
 					ISent.setText(String.valueOf(ir));
