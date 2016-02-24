@@ -63,6 +63,13 @@ public class ReadUserInputTest {
 	@Test
 	public void test2() {
 					//ul
+		System.out.print("\nEnter ultra value (5): ");
+		
+		display.setUltra(Double.parseDouble(in.nextLine()));
+		
+		when(display.getUltra()).thenReturn(5.0);
+		
+		/* BEFORE MOCKITO
 		double expected = 5;
 		
 		System.out.print("\nEnter ultra value (5): ");
@@ -70,6 +77,7 @@ public class ReadUserInputTest {
 		double actual = input.getUserInputUltra(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**
@@ -79,6 +87,13 @@ public class ReadUserInputTest {
 	@Test
 	public void test3() {
 					//ir
+		System.out.print("\nEnter ir value (5): ");
+		
+		display.setIr(Double.parseDouble(in.nextLine()));
+		
+		when(display.getIr()).thenReturn(5.0);
+		
+		/* BEFORE MOCKITO
 		double expected = 5;
 		
 		System.out.print("\nEnter ir value (5): ");
@@ -86,6 +101,7 @@ public class ReadUserInputTest {
 		double actual = input.getUserInputIr(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**
@@ -95,6 +111,13 @@ public class ReadUserInputTest {
 	@Test
 	public void test4() {
 					//torque
+		System.out.print("\nEnter torque value (5): ");
+		
+		display.setTorque(Double.parseDouble(in.nextLine()));
+		
+		when(display.getTorque()).thenReturn(5.0);
+		
+		/* BEFORE MOCKITO
 		double expected = 99.0;
 		
 		System.out.print("\nEnter torque value (5): ");
@@ -102,6 +125,7 @@ public class ReadUserInputTest {
 		double actual = input.getUserInputTorque(in.nextLine());
 		
 		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**

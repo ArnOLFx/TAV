@@ -254,11 +254,11 @@ public class UserInterface {
 		this.torque = torque;
 	}
 	
-	private void setUltra(double ultra) {
+	public void setUltra(double ultra) {
 		this.ultra = ultra;
 	}
 	
-	private void setIr(double ir) {
+	public void setIr(double ir) {
 		this.ir = ir;
 	}
 	
