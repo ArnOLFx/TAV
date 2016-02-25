@@ -119,7 +119,7 @@ public class SpeedAndTorqueBuffer {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		SpeedAndTorqueBuffer satb = new SpeedAndTorqueBuffer();
-		byte[] array = satb.createMockPacket(17, 0.17);
+		byte[] array = satb.createMockPacket(10.0, 0.25);
 		String printArray = "";
 		for (int i = 0; i < array.length; i++){
 			if (i == array.length -1) printArray += array[i];

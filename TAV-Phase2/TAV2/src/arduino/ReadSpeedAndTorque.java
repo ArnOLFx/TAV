@@ -235,9 +235,14 @@ public class ReadSpeedAndTorque {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ReadSpeedAndTorque rst = new ReadSpeedAndTorque();
-		rst.add20BytePacket(20, 0.3);
-		SpeedAndTorque geronimo = rst.getSpeedAndTorque();
-		System.out.println(geronimo.speed + ", " + geronimo.torque);
+		rst.add20BytePacket(10.0, 0.25);
+		//SpeedAndTorque geronimo = rst.getSpeedAndTorque();
+		
+		byte[] val = rst.getPacket();
+		
+		for (int i = 0; i < rst.getPacket().length; i++) {
+			System.out.println(val[i] + " ");
+		}
 
 	}
 

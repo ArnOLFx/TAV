@@ -1,5 +1,8 @@
 package arduino;
 
+import arduino.ReadSpeedAndTorque.SpeedAndTorque;
+
+/*
 class runSensorData implements Runnable {
 	double[] sensorData = { 0, 0, 0 };
 
@@ -24,15 +27,28 @@ class runSensorData implements Runnable {
 	}
 
 }
-
+*/
 class runReadSpeed implements Runnable {
 	ReadFromOutputBuffer readBuffer = new ReadFromOutputBuffer();
-	ReadSpeedAndTorque readSpeed = new ReadSpeedAndTorque();
+	ReadSpeedAndTorque readSpeed;
+	SpeedAndTorque latestData;
+	UserInterface display;
+	
+	public runReadSpeed(UserInterface display, ReadSpeedAndTorque readSpeed) {
+		this.display = display;
+		this.readSpeed = readSpeed;
+		latestData = readSpeed.testSAT;
+	}
 
 	@Override
 	public void run() {
 		while (true) {
-			readSpeed.getSpeedAndTorque();
+			SpeedAndTorque tempST = readSpeed.getSpeedAndTorque();
+			if (tempST != null){
+				latestData = tempST;
+				display.SRec.setText(String.valueOf(latestData.speed));
+				display.TRec.setText(String.valueOf(latestData.torque));
+			}
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -54,7 +70,11 @@ class runInput implements Runnable {
 	
 	WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
 	SendSensorData sendData = new SendSensorData();
-	UserInterface display = new UserInterface();
+	UserInterface display;
+	
+	public runInput(UserInterface display) {
+		this.display = display;
+	}
 
 	@Override
 	public void run() {
@@ -99,13 +119,13 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//UserInterface display = new UserInterface();
-		runSensorData rsd = new runSensorData();
-		runReadSpeed rrs = new runReadSpeed();
-		runInput ri = new runInput();
-		ri.display.frame.setVisible(true);
-		//display.frame.setVisible(true);
-		rsd.start();
+		UserInterface display = new UserInterface();
+		ReadSpeedAndTorque readSpeed = new ReadSpeedAndTorque();
+		//runSensorData rsd = new runSensorData();
+		runInput ri = new runInput(display);
+		runReadSpeed rrs = new runReadSpeed(display, readSpeed);
+		display.frame.setVisible(true);
+		//rsd.start();
 		rrs.start();
 		ri.start();
 	}

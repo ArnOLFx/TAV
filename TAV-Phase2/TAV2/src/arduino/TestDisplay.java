@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-public class UserInterface {
+public class TestDisplay {
 
 	
 	ReadUserInput read;
@@ -38,7 +38,7 @@ public class UserInterface {
 	/**
 	 * Create the application
 	 */
-	public UserInterface() {
+	public TestDisplay() {
 		torque = 0.0;
 		ultra = 0.0;
 		ir = 0.0;
@@ -200,7 +200,7 @@ public class UserInterface {
 		TSent.setBounds(166, 177, 50, 19);
 		panel.add(TSent);
 		TSent.setColumns(10);
-		TSent.setText("0");
+		TSent.setText("1");
 
 		
 		USent = new JTextField();
@@ -210,7 +210,7 @@ public class UserInterface {
 		USent.setBackground(UIManager.getColor("Button.select"));
 		USent.setBounds(166, 197, 50, 19);
 		panel.add(USent);
-		USent.setText("0");
+		USent.setText("1");
 
 		
 		ISent = new JTextField();
@@ -220,7 +220,7 @@ public class UserInterface {
 		ISent.setBackground(UIManager.getColor("Button.select"));
 		ISent.setBounds(166, 217, 50, 19);
 		panel.add(ISent);
-		ISent.setText("0");
+		ISent.setText("1");
 		
 		TRec = new JTextField();
 		TRec.setEditable(false);
@@ -229,7 +229,7 @@ public class UserInterface {
 		TRec.setBackground(UIManager.getColor("Button.select"));
 		TRec.setBounds(376, 177, 50, 19);
 		panel.add(TRec);
-		TRec.setText("0");
+		TRec.setText("1");
 
 		
 		SRec = new JTextField();
@@ -239,7 +239,7 @@ public class UserInterface {
 		SRec.setBackground(UIManager.getColor("Button.select"));
 		SRec.setBounds(376, 197, 50, 19);
 		panel.add(SRec);
-		SRec.setText("0");
+		SRec.setText("1");
 		
 		
 
@@ -254,11 +254,11 @@ public class UserInterface {
 		this.torque = torque;
 	}
 	
-	public void setUltra(double ultra) {
+	private void setUltra(double ultra) {
 		this.ultra = ultra;
 	}
 	
-	public void setIr(double ir) {
+	private void setIr(double ir) {
 		this.ir = ir;
 	}
 	
