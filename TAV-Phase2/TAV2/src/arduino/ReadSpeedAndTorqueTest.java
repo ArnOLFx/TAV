@@ -1,18 +1,25 @@
 package arduino;
 
+import static org.mockito.Mockito.when;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import arduino.ReadSpeedAndTorque.SpeedAndTorque;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class ReadSpeedAndTorqueTest {
 	
 	ReadSpeedAndTorque rst;
+	ReadFromOutputBuffer rfob;
+	@Mock Odroid odroid;
 
 	@Before
 	public void setUp() throws Exception {
-		rst = new ReadSpeedAndTorque();
+		MockitoAnnotations.initMocks(this);
+		rfob = new ReadFromOutputBuffer(odroid);
+		rst = new ReadSpeedAndTorque(rfob);
+		
 	}
 
 	@Test
@@ -25,11 +32,11 @@ public class ReadSpeedAndTorqueTest {
 	  * should return correct speed and torque.
 	  */
 	public final void testGetSpeedAndTorque1() {
-		
 		SpeedAndTorque expected = rst.testSAT;
 		expected.speed = 25;
 		expected.torque = 0.25;
-		rst.add20BytePacket(25, 0.25);
+		byte[] stream = {99,63,-48,0,0,0,0,0,0,80,64,57,0,0,0,0,0,0,36,102};
+		when(odroid.getData()).thenReturn(stream);
 		SpeedAndTorque actual = rst.getSpeedAndTorque();
 		double[] exp = {expected.speed, expected.torque};
 		double[] act = {actual.speed, actual.torque};
@@ -53,7 +60,7 @@ public class ReadSpeedAndTorqueTest {
 		expected.torque = -0.33;
 		byte[] custom = {99,-65,-24,0,0,0,7,0,0,80,64,28,0,0,0,0,0,0,3,102,    //wrong packet
 				99,-65,-43,30,-72,81,-21,-123,31,80,64,40,0,0,0,0,0,0,78,102}; //correct packet
-		rst.addCustomPacket(0, custom);
+		when(odroid.getData()).thenReturn(custom);
 		SpeedAndTorque actual = rst.getSpeedAndTorque();
 		double[] exp = {expected.speed, expected.torque};
 		double[] act = {actual.speed, actual.torque};
@@ -77,7 +84,7 @@ public class ReadSpeedAndTorqueTest {
 				99,63,-71,-103,-103,-103,-103,-103,-102,80,64,36,0,0,0,0,0,25,102,   //missing byte
 				99,63,-87,-103,-103,-103,-103,-103,-102,80,-64,20,0,0,0,0,0,0,85,102 //correct package
 		};
-		rst.addCustomPacket(0, custom);
+		when(odroid.getData()).thenReturn(custom);
 		SpeedAndTorque actual = rst.getSpeedAndTorque();
 		double[] exp = {expected.speed, expected.torque};
 		double[] act = {actual.speed, actual.torque};
@@ -100,7 +107,7 @@ public class ReadSpeedAndTorqueTest {
 				99,63,-23,-103,-103,-103,-103,-103,-102,81,64,52,0,0,0,0,0,0,61,102, //incorect speed del
 				99,63,-55,-103,-103,-103,-103,-103,-102,80,63,-16,0,0,0,0,0,0,62,102 //correct package
 		};
-		rst.addCustomPacket(0, custom);
+		when(odroid.getData()).thenReturn(custom);
 		SpeedAndTorque actual = rst.getSpeedAndTorque();
 		double[] exp = {expected.speed, expected.torque};
 		double[] act = {actual.speed, actual.torque};
@@ -121,7 +128,7 @@ public class ReadSpeedAndTorqueTest {
 		byte[] custom = {
 				0,0,0,62,102,99,63,-59,-62,-113,92,40,-11,-61,80,64,49,0,0,0,0,0,0,2,102,99,63,-23,-103,-103
 		};
-		rst.addCustomPacket(0, custom);
+		when(odroid.getData()).thenReturn(custom);
 		SpeedAndTorque actual = rst.getSpeedAndTorque();
 		double[] exp = {expected.speed, expected.torque};
 		double[] act = {actual.speed, actual.torque};
@@ -139,7 +146,7 @@ public class ReadSpeedAndTorqueTest {
 		byte[] custom = {
 				99,63,-23,-103,-103,-103,-103,-103,-102,81,64,52,0,0,0,0,0,61,102
 		};
-		rst.addCustomPacket(0, custom);
+		when(odroid.getData()).thenReturn(custom);
 		SpeedAndTorque actual = rst.getSpeedAndTorque();
 		Assert.assertEquals(expected, actual);
 	}

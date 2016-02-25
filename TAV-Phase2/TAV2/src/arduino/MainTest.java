@@ -6,60 +6,44 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import arduino.ReadSpeedAndTorque.SpeedAndTorque;
 import static org.mockito.Mockito.*;
 
 public class MainTest {
 	
 	UserInterface display;
 	runReadSpeed readSpeed;
-	@Mock ReadSpeedAndTorque odroid;
-	//@Mock SpeedAndTorque sat;
+	ReadSpeedAndTorque rst;
+	ReadFromOutputBuffer rfob;
+	@Mock Odroid odroid;
 	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		
 		display = new UserInterface();
-		readSpeed = new runReadSpeed(display, odroid);
+		rfob = new ReadFromOutputBuffer(odroid);
+		rst = new ReadSpeedAndTorque(rfob);
+		readSpeed = new runReadSpeed(display, rst);
 	}
 	
 	@Test
 	/**
 	 * runReadSpeed - verify that latest data value is correct
-	 * conditions: - valid, uncorrupted package 
+	 * conditions: - valid, non-corrupted package 
 	*/
 	public void test1() {
-		
-		when(odroid.testSAT.speed).thenReturn(25.0);
-		when(odroid.testSAT.torque).thenReturn(0.25);
-		
-		SpeedAndTorque sat = odroid.testSAT;
-		
-		when(odroid.testSAT).thenReturn(sat);
-		
-		sat = odroid.testSAT;
-		sat.speed = 25.0;
-		sat.torque = 0.25;
-		when(odroid.getSpeedAndTorque()).thenReturn(sat);
+		byte[] stream = {99,63,-61,51,51,51,51,51,51,80,64,46,0,0,0,0,0,0,18,102};
+		when(odroid.getData()).thenReturn(stream);
 		readSpeed.start();
-		double[] expected = {sat.torque, sat.speed};
-		double[] actual = {readSpeed.latestData.torque, readSpeed.latestData.speed};
-		Assert.assertArrayEquals(expected, actual, 0);
-		
-		/*
-		SpeedAndTorque expected = odroid.testSAT;
-		SpeedAndTorque actual;
-		expected.speed = 25;
-		expected.torque = 0.25;
-		odroid.add20BytePacket(25, 0.25);
-		
-		actual = odroid.getSpeedAndTorque();
-		
-		when(odroid.getSpeedAndTorque()).thenReturn(expected);
-		double[] exp = {expected.speed, expected.torque};
-		double[] act = {actual.speed, actual.torque};
-		Assert.assertArrayEquals(exp, act, 0);
-		*/
+		try {
+			//Process is too fast...
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		double[] expecteds = {15.0, 0.15};
+		double[] actuals = {readSpeed.latestData.speed, readSpeed.latestData.torque};
+		Assert.assertArrayEquals(expecteds, actuals, 0);
 	}
 }

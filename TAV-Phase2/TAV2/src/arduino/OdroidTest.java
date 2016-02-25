@@ -2,12 +2,8 @@ package arduino;
 
 import static org.junit.Assert.fail;
 
-import java.io.ByteArrayInputStream;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import arduino.ReadFromOutputBuffer.readObject;
 
 import static org.mockito.Mockito.*;
 

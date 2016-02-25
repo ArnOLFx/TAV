@@ -1,24 +1,36 @@
 package arduino;
 
+import static org.mockito.Mockito.when;
+
 import java.io.ByteArrayInputStream;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class ReadFromOutputBufferTest {
 	
 	ReadFromOutputBuffer read;
 	byte[] emptyBuffer;
+	@Mock Odroid odroid;
+	byte[] custom;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
 		emptyBuffer = new byte[20];
-		read = new ReadFromOutputBuffer();
-		read.outputBufferStream = read.outputBuffer.createMockPacket(15, 0.75);
+		read = new ReadFromOutputBuffer(odroid);
+		custom = new byte[] {
+			99,63,-24,0,0,0,0,0,0,80,64,46,0,0,0,0,0,0,49,102
+	};
+		when(odroid.getData()).thenReturn(custom);
+		
+
 	}
 
 	/**
@@ -49,7 +61,7 @@ public class ReadFromOutputBufferTest {
 	 */
 	@Test
 	public final void testReadFromBuffer1c() {
-		byte[] expected = read.outputBufferStream;
+		byte[] expected = odroid.getData();
 		byte[] actual = new byte[20];
 		int c;
 		int i = 0;
@@ -67,7 +79,7 @@ public class ReadFromOutputBufferTest {
 	 */
 	@Test
 	public final void testReadFromBuffer2() {
-		read.outputBufferStream = emptyBuffer; //clears the buffer
+		when(odroid.getData()).thenReturn(emptyBuffer);
 		int expected = 1; //empty buffer
 		int actual = read.readFromBuffer(20).error;
 		Assert.assertEquals(expected, actual);

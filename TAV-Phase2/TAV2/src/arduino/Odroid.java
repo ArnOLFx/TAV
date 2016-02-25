@@ -1,28 +1,18 @@
 package arduino;
 
+import java.io.ByteArrayOutputStream;
+
 public class Odroid {
 	
-	ReadSpeedAndTorque read;
-	int startTime, stopTime;
+	static ByteArrayOutputStream networkStream = new ByteArrayOutputStream(256);
 	
-	public Odroid() {
-		read = new ReadSpeedAndTorque();
-		startTime = (int) System.currentTimeMillis() / 1000;
+	void sendData(byte[] data){
+		for (byte i : data) networkStream.write(i);
 	}
 	
-	public void setBuffer(double torque, double ultra, double ir) {
-		
-		stopTime = (int) System.currentTimeMillis() / 1000;
-		
-		int time = stopTime - startTime;
-		double distance = (ultra + ir) / 2;
-		
-		read.add20BytePacket((distance / time), torque);
-		
-		startTime = (int) System.currentTimeMillis() / 1000;
+	public byte[] getData() {
+		byte[] data = networkStream.toByteArray();
+		return data; 
 	}
-	
-	public byte[] getBuffer() {
-		return read.getPacket();
-	}
+
 }

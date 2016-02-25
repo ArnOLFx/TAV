@@ -8,25 +8,20 @@ import java.io.ByteArrayInputStream;
  */
 public class ReadFromOutputBuffer {
 	
-	// object containing error code and byte stream. (return object)
-	class readObject {
-		int error;
-		ByteArrayInputStream byteStream;
-		
-		public readObject(int error, ByteArrayInputStream byteStream){
-			this.error = error;
-			this.byteStream = byteStream;
-		}
-	}
-	
-	// the output buffer stream.
-	byte[] outputBufferStream = new byte[20];
+//	// the output buffer stream.
+	byte[] odroidData;
 	
 	//initialise auxiliary buffer class for creating buffer packets.
 	SpeedAndTorqueBuffer outputBuffer = new SpeedAndTorqueBuffer();
 	
 	//sample readObject for testing purposes
 	readObject testRO = new readObject(0,new ByteArrayInputStream(new byte[0]));
+	
+	Odroid odroid;
+	
+	public ReadFromOutputBuffer(Odroid odroid){
+		this.odroid = odroid;
+	}
 	
 	/**
 	 * Description: 
@@ -64,8 +59,11 @@ public class ReadFromOutputBuffer {
 		 * empty buffer check implemented to fulfil test case 2
 		 * -> java.lang.AssertionError: expected:<1> but was:<0>
 		 */
+		
+		odroidData = odroid.getData();
+		
 		boolean isEmpty = true;
-		for (byte i : outputBufferStream) {
+		for (byte i : odroidData) {
 			if (i != 0) {
 				isEmpty = false;
 				break;
@@ -87,10 +85,10 @@ public class ReadFromOutputBuffer {
 		 * -> java.lang.ArrayIndexOutOfBoundsException: 20
 		 */
 		for (int i = 0; i < n; i++){
-			if (i > outputBufferStream.length -1)
+			if (i > odroidData.length -1)
 				stream[i] = 0;
 			else
-				stream[i] = outputBufferStream[i];
+				stream[i] = odroidData[i];
 		}
 		
 		readObject streamObject = new readObject(0, new ByteArrayInputStream(stream));
@@ -99,11 +97,12 @@ public class ReadFromOutputBuffer {
 		 * check for n > outputbufferstream implemented (fulfils test case 4)
 		 * -> java.lang.AssertionError: expected:<10> but was:<1>
 		 */
-		if (n > outputBufferStream.length) streamObject.error = 2;
+		if (n > odroidData.length) streamObject.error = 2;
 		
 		
 		return streamObject;
 	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -111,3 +110,14 @@ public class ReadFromOutputBuffer {
 	}
 
 }
+
+//object containing error code and byte stream. (return object)
+	class readObject {
+		int error;
+		ByteArrayInputStream byteStream;
+		
+		public readObject(int error, ByteArrayInputStream byteStream){
+			this.error = error;
+			this.byteStream = byteStream;
+		}
+	}

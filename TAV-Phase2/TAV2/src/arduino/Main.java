@@ -1,6 +1,5 @@
 package arduino;
 
-import arduino.ReadSpeedAndTorque.SpeedAndTorque;
 
 /*
 class runSensorData implements Runnable {
@@ -29,23 +28,22 @@ class runSensorData implements Runnable {
 }
 */
 class runReadSpeed implements Runnable {
-	ReadFromOutputBuffer readBuffer = new ReadFromOutputBuffer();
 	ReadSpeedAndTorque readSpeed;
-	SpeedAndTorque latestData;
+	SpeedAndTorque latestData = new SpeedAndTorque(0,0);
 	UserInterface display;
 	
 	public runReadSpeed(UserInterface display, ReadSpeedAndTorque readSpeed) {
 		this.display = display;
 		this.readSpeed = readSpeed;
-		latestData = readSpeed.testSAT;
 	}
 
 	@Override
-	public void run() {
+	public void run() {		
 		while (true) {
 			SpeedAndTorque tempST = readSpeed.getSpeedAndTorque();
 			if (tempST != null){
 				latestData = tempST;
+				System.out.println("Speed: " + latestData.speed);
 				display.SRec.setText(String.valueOf(latestData.speed));
 				display.TRec.setText(String.valueOf(latestData.torque));
 			}
@@ -114,13 +112,12 @@ class runInput implements Runnable {
  */
 public class Main {
 	
-	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		UserInterface display = new UserInterface();
-		ReadSpeedAndTorque readSpeed = new ReadSpeedAndTorque();
+		ReadSpeedAndTorque readSpeed = new ReadSpeedAndTorque(new ReadFromOutputBuffer(new Odroid()));
 		//runSensorData rsd = new runSensorData();
 		runInput ri = new runInput(display);
 		runReadSpeed rrs = new runReadSpeed(display, readSpeed);
