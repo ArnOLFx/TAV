@@ -28,8 +28,11 @@ public class MainTest {
 	
 	@Test
 	/**
-	 * runReadSpeed - verify that latest data value is correct
-	 * conditions: - valid, non-corrupted package 
+	 * Scenario: Receiving Normal Data
+	 * Tested Class: runReadSpeed()
+	 * Test description: mock a packet from odroid (normal data) and check if the latest received value is
+	 *                   correct
+	 * Conditions: - Valid, non-corrupted package 
 	*/
 	public void test1() {
 		byte[] stream = {99,63,-61,51,51,51,51,51,51,80,64,46,0,0,0,0,0,0,18,102};
