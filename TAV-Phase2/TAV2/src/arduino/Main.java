@@ -43,7 +43,6 @@ class runReadSpeed implements Runnable {
 			SpeedAndTorque tempST = readSpeed.getSpeedAndTorque();
 			if (tempST != null){
 				latestData = tempST;
-				System.out.println("Speed: " + latestData.speed);
 				display.SRec.setText(String.valueOf(latestData.speed));
 				display.TRec.setText(String.valueOf(latestData.torque));
 			}
@@ -52,6 +51,7 @@ class runReadSpeed implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			System.out.println("Speed: " + latestData.speed);
 		}
 	}
 
