@@ -24,9 +24,9 @@ public class UserInterface {
 	public JTextField ISent;
 	public JTextField TRec;
 	public JTextField SRec;
-	private JTextField InputT;
-	private JTextField InputU;
-	private JTextField InputI;
+	JTextField InputT;
+	JTextField InputU;
+	JTextField InputI;
 
 	/**
 	 * Launch the application.

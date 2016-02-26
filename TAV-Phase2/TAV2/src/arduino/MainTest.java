@@ -15,7 +15,7 @@ public class MainTest {
 	UserInterface display;
 	
 	runReadSpeed readSpeed;
-	@Mock runInput input;
+	runInput input;
 	Scanner sc;
 	
 	ReadSpeedAndTorque rst;
@@ -31,10 +31,12 @@ public class MainTest {
 		rfob = new ReadFromOutputBuffer(odroid);
 		rst = new ReadSpeedAndTorque(rfob);
 		readSpeed = new runReadSpeed(display, rst);
+		input = new runInput(display);
 	}
 	
 	@Test
 	/**
+	 * Scenario: Receive normal data
 	 * runReadSpeed - verify that latest data value is correct
 	 * conditions: - valid, non-corrupted package 
 	*/
@@ -55,7 +57,7 @@ public class MainTest {
 	
 	@Test
 	/**
-	 * Scenario: Corrupt packet
+	 * Scenario: Receive corrupt packet
 	 * runReadSpeed - verify that latest data value is not corrupted
 	 * conditions: - invalid, corrupt packet
 	*/
@@ -86,7 +88,7 @@ public class MainTest {
 	
 	@Test
 	/**
-	 * Scenario: Out of range data
+	 * Scenario: Receive out of range data
 	 * runReadSpeed - verify that latest data value is within range of accepted values
 	 * conditions: - invalid, non-corrupt packet.
 	*/
@@ -107,54 +109,42 @@ public class MainTest {
 		Assert.assertArrayEquals(expecteds, actuals, 0);
 	}
 	
-	//@Test
+	@Test
 	/**
-	 * Scenario: Testing display member in runInput + user input.
-	 * runInput - 
-	 * conditions: - 
-	*//*
+	 * Scenario: Send normal data
+	 * runInput - send torque data within range and verify that the display is correctly updated
+	 * conditions: - valid torque entry
+	*/
 	public void test4() throws InterruptedException {
 		
-		input.setDisplay(new UserInterface());
-		
-		when(input.display.getTorque()).thenReturn(null);
-		
-		/*byte[] stream = {98,64,20,0,0,0,0,0,0,98,64,73,0,0,0,0,0,0,21,102};
-		when(odroid.getData()).thenReturn(stream);
-		readSpeed.start();
-		
+		input.start();
+		display.InputT.setText("0.5");
+		display.InputT.postActionEvent();
 		//Process is too fast...
 		Thread.sleep(1000);
 		
-		System.out.println("Test: 4");
-		
-		//Since the data sent is out of range, the values for speed and torque are not changed.
-		//They remain un-initialized (default 0.0)
-		double[] expecteds = {0.0, 0.0};
-		double[] actuals = {readSpeed.latestData.speed, readSpeed.latestData.torque};
-		Assert.assertArrayEquals(expecteds, actuals, 0);*/
-	//}
+		double expected = 0.5;
+		double actual = Double.parseDouble(display.TSent.getText());
+
+		Assert.assertEquals(expected, actual, 0);
+	}
 	
-	//@Test
+	@Test
 	/**
-	 * Scenario: 
-	 * runInput - 
-	 * conditions: - 
-	*//*
+	 * Scenario: Send out of range data
+	 * runInput - send ultra_distance value out of range and verify that the display is not updated
+	 * conditions: - invalid ultra entry
+	*/
 	public void test5() throws InterruptedException {
-		byte[] stream = {98,64,20,0,0,0,0,0,0,98,64,73,0,0,0,0,0,0,21,102};
-		when(odroid.getData()).thenReturn(stream);
-		readSpeed.start();
-		
+		input.start();
+		display.InputU.setText("60");
+		display.InputU.postActionEvent();
 		//Process is too fast...
 		Thread.sleep(1000);
 		
-		System.out.println("Test: 5");
-		
-		//Since the data sent is out of range, the values for speed and torque are not changed.
-		//They remain un-initialized (default 0.0)
-		double[] expecteds = {0.0, 0.0};
-		double[] actuals = {readSpeed.latestData.speed, readSpeed.latestData.torque};
-		Assert.assertArrayEquals(expecteds, actuals, 0);
-	}*/
+		double expected = 0.0;
+		double actual = Double.parseDouble(display.USent.getText());
+
+		Assert.assertEquals(expected, actual, 0);
+	}
 }
