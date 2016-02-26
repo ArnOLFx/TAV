@@ -1,17 +1,23 @@
 package arduino;
 
+import static org.mockito.Mockito.when;
+
+import java.util.Scanner;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.*;
-
 public class MainTest {
 	
 	UserInterface display;
+	
 	runReadSpeed readSpeed;
+	@Mock runInput input;
+	Scanner sc;
+	
 	ReadSpeedAndTorque rst;
 	ReadFromOutputBuffer rfob;
 	@Mock Odroid odroid;
@@ -20,6 +26,7 @@ public class MainTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		
+		sc = new Scanner(System.in);
 		display = new UserInterface();
 		rfob = new ReadFromOutputBuffer(odroid);
 		rst = new ReadSpeedAndTorque(rfob);
@@ -28,11 +35,8 @@ public class MainTest {
 	
 	@Test
 	/**
-	 * Scenario: Receiving Normal Data
-	 * Tested Class: runReadSpeed()
-	 * Test description: mock a packet from odroid (normal data) and check if the latest received value is
-	 *                   correct
-	 * Conditions: - Valid, non-corrupted package 
+	 * runReadSpeed - verify that latest data value is correct
+	 * conditions: - valid, non-corrupted package 
 	*/
 	public void test1() throws InterruptedException {
 		byte[] stream = {99,63,-61,51,51,51,51,51,51,80,64,46,0,0,0,0,0,0,18,102};
@@ -102,4 +106,55 @@ public class MainTest {
 		double[] actuals = {readSpeed.latestData.speed, readSpeed.latestData.torque};
 		Assert.assertArrayEquals(expecteds, actuals, 0);
 	}
+	
+	//@Test
+	/**
+	 * Scenario: Testing display member in runInput + user input.
+	 * runInput - 
+	 * conditions: - 
+	*//*
+	public void test4() throws InterruptedException {
+		
+		input.setDisplay(new UserInterface());
+		
+		when(input.display.getTorque()).thenReturn(null);
+		
+		/*byte[] stream = {98,64,20,0,0,0,0,0,0,98,64,73,0,0,0,0,0,0,21,102};
+		when(odroid.getData()).thenReturn(stream);
+		readSpeed.start();
+		
+		//Process is too fast...
+		Thread.sleep(1000);
+		
+		System.out.println("Test: 4");
+		
+		//Since the data sent is out of range, the values for speed and torque are not changed.
+		//They remain un-initialized (default 0.0)
+		double[] expecteds = {0.0, 0.0};
+		double[] actuals = {readSpeed.latestData.speed, readSpeed.latestData.torque};
+		Assert.assertArrayEquals(expecteds, actuals, 0);*/
+	//}
+	
+	//@Test
+	/**
+	 * Scenario: 
+	 * runInput - 
+	 * conditions: - 
+	*//*
+	public void test5() throws InterruptedException {
+		byte[] stream = {98,64,20,0,0,0,0,0,0,98,64,73,0,0,0,0,0,0,21,102};
+		when(odroid.getData()).thenReturn(stream);
+		readSpeed.start();
+		
+		//Process is too fast...
+		Thread.sleep(1000);
+		
+		System.out.println("Test: 5");
+		
+		//Since the data sent is out of range, the values for speed and torque are not changed.
+		//They remain un-initialized (default 0.0)
+		double[] expecteds = {0.0, 0.0};
+		double[] actuals = {readSpeed.latestData.speed, readSpeed.latestData.torque};
+		Assert.assertArrayEquals(expecteds, actuals, 0);
+	}*/
 }

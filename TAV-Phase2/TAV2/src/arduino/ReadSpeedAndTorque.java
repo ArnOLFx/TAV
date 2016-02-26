@@ -1,6 +1,8 @@
 package arduino;
 
+import java.io.ByteArrayInputStream;
 import java.nio.ByteBuffer;
+import java.util.Random;
 
 /**
  *  Methods:
@@ -15,6 +17,8 @@ public class ReadSpeedAndTorque {
 	ReadFromOutputBuffer rfoBuffer;
 	
 	//private field (attribute) containing the current bytestream from received from the network
+	byte[] testBA = {0};
+	ByteArrayInputStream bais = new ByteArrayInputStream(testBA);
 	private readObject networkBytestream;
 	
 	SpeedAndTorque testSAT = new SpeedAndTorque(0,0);
@@ -22,6 +26,47 @@ public class ReadSpeedAndTorque {
 	public ReadSpeedAndTorque(ReadFromOutputBuffer outputBuffer){
 		this.rfoBuffer = outputBuffer;
 		this.networkBytestream = outputBuffer.testRO;
+	}
+	
+	
+	/**
+	 * Description: 
+	 * Auxiliary method for testing. Creates a mock speed and torque packet and
+	 * places it in the networkBytestream buffer. Needed in order to be able to
+	 * populate the private field for testing.
+	 * 
+	 * Pre-condition: 
+	 * ReadSpeedAndTorque needs to be instantiated before performing this operation.
+	 *  
+	 * Post-condition: 
+	 * networkBytestream contains generated object.
+	 * 
+	 *  Test-cases: 
+	 *  As networkBytestream is a private field, this method cannot be directly tested  
+	*/
+	public void add20BytePacket(double speed, double torque){
+		rfoBuffer.odroidData = rfoBuffer.outputBuffer.createMockPacket(speed, torque);
+		networkBytestream = rfoBuffer.readFromBuffer(20);
+	}
+	
+	/**
+	 * Description: 
+	 * Auxiliary method for testing. Creates a custom speed and torque packet and
+	 * places it in the networkBytestream buffer. Useful when testing for wrong delimiters,
+	 * size, values...
+	 * 
+	 * Pre-condition: 
+	 * ReadSpeedAndTorque needs to be instantiated before performing this operation.
+	 *  
+	 * Post-condition: 
+	 * networkBytestream contains generated object.
+	 * 
+	 *  Test-cases: 
+	 *  As networkBytestream is a private field, this method cannot be directly tested  
+	*/
+	public void addCustomPacket(int errorCode, byte[] custom){
+		networkBytestream.error = errorCode;
+		networkBytestream.byteStream = new ByteArrayInputStream(custom);
 	}
 	
 	/**
@@ -183,6 +228,36 @@ public class ReadSpeedAndTorque {
 		
 		if (expected == actual) return true;
 		return false;
+	}
+	
+	public SpeedAndTorque receiveData(){
+		Random r = new Random();
+		double Result = r.nextDouble() * 25;
+		double speedD = Result;
+		Random rr = new Random();
+		double Result1 = rr.nextDouble() - 0.5;
+		double torqueD = Result1;
+		
+		System.out.println(speedD + ", " + torqueD);
+		
+		SpeedAndTorque result = new SpeedAndTorque(speedD,torqueD);
+		
+		return result;
+		
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ReadSpeedAndTorque rst = new ReadSpeedAndTorque(new ReadFromOutputBuffer(new Odroid()));
+		rst.add20BytePacket(10.0, 0.25);
+		//SpeedAndTorque geronimo = rst.getSpeedAndTorque();
+		
+		byte[] val = rst.getPacket();
+		
+		for (int i = 0; i < rst.getPacket().length; i++) {
+			System.out.println(val[i] + " ");
+		}
+
 	}
 
 }

@@ -1,0 +1,6 @@
+With our first test cases, we have a coverage of about 60%.
+To increase out coverage we implemented three new scenarios.
+The scenarios concern the Odroid, we mock the Odroid to simulate recieving data from it.
+
+After this implementation our coverage went up over 20% (see picture).
+(These scenarios are in the class "MainTest.java", and the code-snippet is from the class "ReadUserInput.java").

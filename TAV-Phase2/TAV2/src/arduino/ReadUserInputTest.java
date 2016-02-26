@@ -68,6 +68,16 @@ public class ReadUserInputTest {
 		display.setUltra(Double.parseDouble(in.nextLine()));
 		
 		when(display.getUltra()).thenReturn(5.0);
+		
+		/* BEFORE MOCKITO
+		double expected = 5;
+		
+		System.out.print("\nEnter ultra value (5): ");
+		
+		double actual = input.getUserInputUltra(in.nextLine());
+		
+		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**
@@ -83,10 +93,19 @@ public class ReadUserInputTest {
 		
 		when(display.getIr()).thenReturn(5.0);
 		
+		/* BEFORE MOCKITO
+		double expected = 5;
+		
+		System.out.print("\nEnter ir value (5): ");
+		
+		double actual = input.getUserInputIr(in.nextLine());
+		
+		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**
-	 * Test case 4: reads data from user and tests if the output is equal to the input
+	 * Test case 3: reads data from user and tests if the output is equal to the input
 	 * In this case we look for torque and if it is in bounds
 	 */
 	@Test
@@ -98,36 +117,56 @@ public class ReadUserInputTest {
 		
 		when(display.getTorque()).thenReturn(5.0);
 		
+		/* BEFORE MOCKITO
+		double expected = 99.0;
+		
+		System.out.print("\nEnter torque value (5): ");
+		
+		double actual = input.getUserInputTorque(in.nextLine());
+		
+		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**
-	 * Test case 5: reads data from user and tests if the output is equal to the input
-	 * In this case we look for ultra and if it is in bounds
+	 * Test case 3: reads data from user and tests if the output is equal to the input
+	 * In this case we look for ultraDistance and if it is in bounds
 	 */
 	@Test
 	public void test5() {
 					//ultra
+		double expected = 99.0;
+		
 		System.out.print("\nEnter ultra value (50): ");
 		
-		display.setUltra(Double.parseDouble(in.nextLine()));
+		double actual = input.getUserInputUltra(in.nextLine());
 		
-		when(display.getUltra()).thenReturn(50.0);
-		
+		Assert.assertEquals(expected, actual, 0);
 	}
 	
 	/**
-	 * Test case 6: reads data from user and tests if the output is equal to the input
+	 * Test case 3: reads data from user and tests if the output is equal to the input
 	 * In this case we look for irDistance and if it is in bounds
 	 */
 	@Test
 	public void test6() {
 					//ir
+		double expected = 99.0;
 		
-		System.out.print("\nEnter Ir value (50): ");
+		System.out.print("\nEnter ultra value (50): ");
 		
-		display.setUltra(Double.parseDouble(in.nextLine()));
+		double actual = input.getUserInputIr(in.nextLine());
 		
-		when(display.getUltra()).thenReturn(50.0);
-
+		Assert.assertEquals(expected, actual, 0);
+	}
+	
+	/**
+	 * Test case 3: reads data from user and tests if the output is equal to the input
+	 * In this case we look for irDistance and if it is in bounds
+	 */
+	@Test
+	public void test7() {
+					//ir
+		//Assert.assertEquals(5, actual)
 	}
 }

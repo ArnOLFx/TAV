@@ -163,6 +163,7 @@ public class UserInterface {
 					System.out.println("Wrong ultra value input");
 				}else{
 					USent.setText(String.valueOf(ultra));
+					//TRec.setText(String.valueOf(Math.round(ultra) * 0.1));
 					setUltra(ultra);
 				}
 			}
@@ -187,6 +188,7 @@ public class UserInterface {
 					System.out.println("Wrong IR value input");
 				}else{
 					ISent.setText(String.valueOf(ir));
+					//SRec.setText(String.valueOf(Math.round(ir) * 1.5));
 					setIr(ir);
 				}			
 			}
@@ -230,7 +232,6 @@ public class UserInterface {
 		TRec.setBounds(376, 177, 50, 19);
 		panel.add(TRec);
 		TRec.setText("0");
-
 		
 		SRec = new JTextField();
 		SRec.setEditable(false);
@@ -240,8 +241,6 @@ public class UserInterface {
 		SRec.setBounds(376, 197, 50, 19);
 		panel.add(SRec);
 		SRec.setText("0");
-		
-		
 
 	}
 	

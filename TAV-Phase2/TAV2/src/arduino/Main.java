@@ -41,6 +41,7 @@ class runReadSpeed implements Runnable {
 	public void run() {		
 		while (true) {
 			SpeedAndTorque tempST = readSpeed.getSpeedAndTorque();
+			//tempST = readSpeed.receiveData();
 			if (tempST != null){
 				latestData = tempST;
 				display.SRec.setText(String.valueOf(latestData.speed));
@@ -71,6 +72,10 @@ class runInput implements Runnable {
 	UserInterface display;
 	
 	public runInput(UserInterface display) {
+		this.display = display;
+	}
+	
+	public void setDisplay(UserInterface display) {
 		this.display = display;
 	}
 
