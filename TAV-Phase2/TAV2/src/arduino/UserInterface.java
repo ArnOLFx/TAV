@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +16,8 @@ public class UserInterface {
 
 	
 	ReadUserInput read;
+	
+	boolean isClicked = false;
 	
 	private double torque, ultra, ir;
 	
@@ -27,6 +30,7 @@ public class UserInterface {
 	private JTextField InputT;
 	private JTextField InputU;
 	private JTextField InputI;
+	private JButton b;
 
 	/**
 	 * Launch the application.
@@ -116,6 +120,33 @@ public class UserInterface {
 		lblSRec.setBounds(240, 197, 86, 15);
 		panel.add(lblSRec);
 		
+		/**
+		 * Implemented for GUI testing
+		 */
+		b = new JButton();
+		b.setVisible(true);
+		b.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 10));
+		b.setBackground(UIManager.getColor("Button.selected"));
+		b.setBounds(240, 27, 86, 15);
+		b.setSize(110, 40);
+		b.setText("Connect USB");
+		panel.add(b);
+		
+		b.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (isClicked == false) {
+					isClicked = true;
+					b.setText("Disconnect USB");
+				} else if (isClicked) {
+					isClicked = false;
+					b.setText("Connect USB");
+				}
+			}
+			
+		});
+		
 				
 		InputT = new JTextField();
 		InputT.setText("1");
@@ -137,8 +168,10 @@ public class UserInterface {
 				double torque = read.getUserInputTorque(InputT.getText());
 				if (torque == 99.0){
 					System.out.println("Wrong torque value input");
+					TSent.setBackground(new Color(255, 0, 0));
 				}else{
 					TSent.setText(String.valueOf(torque));
+					TSent.setBackground(UIManager.getColor("Button.select"));
 					setTorque(torque);
 				}
 			}
@@ -161,9 +194,10 @@ public class UserInterface {
 				double ultra = read.getUserInputUltra(InputU.getText());
 				if (ultra == 99.0){
 					System.out.println("Wrong ultra value input");
+					USent.setBackground(new Color(255, 0, 0));
 				}else{
 					USent.setText(String.valueOf(ultra));
-					//TRec.setText(String.valueOf(Math.round(ultra) * 0.1));
+					USent.setBackground(UIManager.getColor("Button.select"));
 					setUltra(ultra);
 				}
 			}
@@ -186,9 +220,10 @@ public class UserInterface {
 				double ir = read.getUserInputIr(InputI.getText());
 				if (ir == 99.0){
 					System.out.println("Wrong IR value input");
+					ISent.setBackground(new Color(255, 0, 0));
 				}else{
 					ISent.setText(String.valueOf(ir));
-					//SRec.setText(String.valueOf(Math.round(ir) * 1.5));
+					ISent.setBackground(UIManager.getColor("Button.select"));
 					setIr(ir);
 				}			
 			}

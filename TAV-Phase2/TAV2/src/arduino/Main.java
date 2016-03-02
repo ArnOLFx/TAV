@@ -41,12 +41,22 @@ class runReadSpeed implements Runnable {
 	public void run() {		
 		while (true) {
 			SpeedAndTorque tempST = readSpeed.getSpeedAndTorque();
-			//tempST = readSpeed.receiveData();
 			if (tempST != null){
 				latestData = tempST;
 				display.SRec.setText(String.valueOf(latestData.speed));
 				display.TRec.setText(String.valueOf(latestData.torque));
 			}
+			//Implemented for GUI testing (See also JButton impl. in UserInteface)
+			if (display.isClicked) {
+				tempST = readSpeed.receiveData();
+				
+				if (tempST != null){
+					latestData = tempST;
+					display.SRec.setText(String.valueOf(latestData.speed));
+					display.TRec.setText(String.valueOf(latestData.torque));
+				}
+			}
+			
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

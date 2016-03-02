@@ -1,0 +1,130 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>TestCode.sikuli</h2> <a href="TestCode.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="skw">wait</span>(<img src="1456936198062.png" />)
+<span class="kw">if</span> <span class="skw">find</span>(<img src="1456936198062.png" />):
+    <span class="kw">print</span> <span class="str">"Found window"</span>
+    <span class="skw">click</span>(Pattern(<img src="1456937372486.png" />).targetOffset(<span class="dig">62</span>,-<span class="dig">14</span>))
+    <span class="skw">type</span>(<span class="str">"5"</span>)
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="kw">if</span> <span class="skw">find</span>(<img src="1456937565551.png" />):
+        <span class="kw">print</span> <span class="str">"The entered value (torque) was out of bounds!"</span>
+
+        <span class="kw">if</span> <span class="skw">find</span>(Pattern(<img src="1456937696058.png" />).targetOffset(<span class="dig">62</span>,-<span class="dig">2</span>)):
+
+            <span class="skw">click</span>(Pattern(<img src="1456937696058.png" />).targetOffset(<span class="dig">62</span>,-<span class="dig">2</span>))
+
+            <span class="skw">type</span>(<span class="str">"9"</span>)
+            <span class="skw">type</span>(Key.ENTER)
+
+            <span class="kw">if</span> <span class="skw">find</span>(<img src="1456937753594.png" />):
+                <span class="kw">print</span> <span class="str">"Entered value (ultra) was out of bounds!"</span>
+
+                <span class="kw">if</span> <span class="skw">find</span>(Pattern(<img src="1456937798124.png" />).targetOffset(<span class="dig">60</span>,<span class="dig">17</span>)):
+
+                    <span class="skw">click</span>(Pattern(<img src="1456937798124.png" />).targetOffset(<span class="dig">60</span>,<span class="dig">17</span>))
+
+                    <span class="skw">type</span>(<span class="str">"9"</span>)
+                    <span class="skw">type</span>(Key.ENTER)
+
+                    <span class="kw">if</span> <span class="skw">find</span>(<img src="1456937840419.png" />):
+                        <span class="kw">print</span> <span class="str">"Entered value (ir) was out of bounds!"</span>
+                        <span class="kw">print</span> <span class="str">"All values are now tested.."</span>
+                        <span class="kw">print</span> <span class="str">"Testing USB Connection..."</span>
+
+                        <span class="kw">if</span> <span class="skw">find</span>(<img src="1456937900601.png" />):
+                            <span class="skw">click</span>(<img src="1456937919873.png" />)
+                            <span class="kw">print</span> <span class="str">"Check if USB is connected..."</span>
+
+                            <span class="kw">if</span> <span class="skw">find</span>(<img src="1456938003863.png" />):
+                                <span class="kw">print</span> <span class="str">"USB is now connected!"</span>
+
+                                <span class="kw">print</span> <span class="str">"Checking to turn off USB..."</span>
+
+                                <span class="kw">if</span> <span class="skw">find</span>(<img src="1456938292077.png" />):
+
+                                    <span class="skw">click</span>(<img src="1456938292077.png" />)
+                                    <span class="kw">if</span> <span class="skw">find</span>(<img src="1456938326227.png" />):
+                                        <span class="kw">print</span> <span class="str">"USB is now disconnected..."</span>
+                                        <span class="kw">print</span> <span class="str">""</span>
+                                        <span class="kw">print</span> <span class="str">"All tests were successfully made!"</span>
+                                        <span class="kw">print</span> <span class="str">"Shutting down!"</span>
+
+    <span class="kw">else</span>:
+        <span class="kw">print</span> <span class="str">"Value is in range or did not find error value"</span>
+
+<span class="kw">else</span>:
+    <span class="kw">print</span> <span class="str">"Could not find find GUI window!"</span>
+</pre>
+</body>
+</html>
