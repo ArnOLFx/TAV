@@ -28,6 +28,7 @@ public class ReadSpeedAndTorque {
 		this.networkBytestream = outputBuffer.testRO;
 	}
 	
+
 	
 	/**
 	 * Description: 
@@ -44,10 +45,16 @@ public class ReadSpeedAndTorque {
 	 *  Test-cases: 
 	 *  As networkBytestream is a private field, this method cannot be directly tested  
 	*/
+	
+	/**
+	 * NOT USED ANYMORE
+	 */
+	/*
 	public void add20BytePacket(double speed, double torque){
 		rfoBuffer.odroidData = rfoBuffer.outputBuffer.createMockPacket(speed, torque);
 		networkBytestream = rfoBuffer.readFromBuffer(20);
 	}
+	*/
 	
 	/**
 	 * Description: 
@@ -64,10 +71,16 @@ public class ReadSpeedAndTorque {
 	 *  Test-cases: 
 	 *  As networkBytestream is a private field, this method cannot be directly tested  
 	*/
+	
+	/**
+	 * NOT USED ANYMORE
+	 */
+	/*
 	public void addCustomPacket(int errorCode, byte[] custom){
 		networkBytestream.error = errorCode;
 		networkBytestream.byteStream = new ByteArrayInputStream(custom);
 	}
+	*/
 	
 	/**
 	 * Description: 
@@ -230,6 +243,11 @@ public class ReadSpeedAndTorque {
 		return false;
 	}
 	
+	/**
+	 * Method for displaying random values in the GUI. Not used.
+	 */
+	
+	/*
 	public SpeedAndTorque receiveData(){
 		Random r = new Random();
 		double Result = r.nextDouble() * 25;
@@ -245,21 +263,8 @@ public class ReadSpeedAndTorque {
 		return result;
 		
 	}
+	*/
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ReadSpeedAndTorque rst = new ReadSpeedAndTorque(new ReadFromOutputBuffer(new Odroid()));
-		rst.add20BytePacket(10.0, 0.25);
-		//SpeedAndTorque geronimo = rst.getSpeedAndTorque();
-		
-		byte[] val = rst.getPacket();
-		
-		for (int i = 0; i < rst.getPacket().length; i++) {
-			System.out.println(val[i] + " ");
-		}
-
-	}
-
 }
 //class containing values of speed and torque (return object)
 	class SpeedAndTorque {
