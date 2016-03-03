@@ -119,7 +119,22 @@
                                         <span class="kw">print</span> <span class="str">""</span>
                                         <span class="kw">print</span> <span class="str">"All tests were successfully made!"</span>
                                         <span class="kw">print</span> <span class="str">"Shutting down!"</span>
-
+                                    <span class="kw">else</span>:
+                                        <span class="kw">print</span> <span class="str">"Unable to disconnect USB"</span>
+                                <span class="kw">else</span>:
+                                    <span class="kw">print</span> <span class="str">"Could not find disconnect button"</span>
+                            <span class="kw">else</span>:
+                                <span class="kw">print</span> <span class="str">"Error after connecting USB"</span>
+                        <span class="kw">else</span>:
+                            <span class="kw">print</span> <span class="str">"Could not connect USB"</span>
+                    <span class="kw">else</span>:
+                        <span class="kw">print</span> <span class="str">"Could not check error for ir value"</span>
+                <span class="kw">else</span>:
+                    <span class="kw">print</span> <span class="str">"Could not check error for ultra value"</span>
+            <span class="kw">else</span>:
+                <span class="kw">print</span> <span class="str">"Could not check error for torque value"</span>
+        <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Could not check error for torque value"</span>
     <span class="kw">else</span>:
         <span class="kw">print</span> <span class="str">"Value is in range or did not find error value"</span>
 

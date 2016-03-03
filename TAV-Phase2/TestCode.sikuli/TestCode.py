@@ -47,7 +47,22 @@ if find("1456936198062.png"):
                                         print ""
                                         print "All tests were successfully made!"
                                         print "Shutting down!"
-        
+                                    else:
+                                        print "Unable to disconnect USB"
+                                else:
+                                    print "Could not find disconnect button"
+                            else:
+                                print "Error after connecting USB"
+                        else:
+                            print "Could not connect USB"
+                    else:
+                        print "Could not check error for ir value"
+                else:
+                    print "Could not check error for ultra value"                        
+            else:
+                print "Could not check error for torque value"
+        else:
+            print "Could not check error for torque value"
     else:
         print "Value is in range or did not find error value"
     
