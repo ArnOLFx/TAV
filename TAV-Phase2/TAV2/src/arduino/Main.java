@@ -1,5 +1,32 @@
 package arduino;
 
+
+/*
+class runSensorData implements Runnable {
+	double[] sensorData = { 0, 0, 0 };
+
+	SendSensorData sendData = new SendSensorData();
+	WriteToInputBuffer writeBuffer = new WriteToInputBuffer();
+
+	@Override
+	public void run() {
+		while (true) {
+			writeBuffer.sendByteToBuffer(29, sendData.createPacket(sensorData[0], sensorData[1], sensorData[2]));
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void start() {
+		Thread t = new Thread(this);
+		t.start();
+	}
+
+}
+*/
 class runReadSpeed implements Runnable {
 	ReadSpeedAndTorque readSpeed;
 	SpeedAndTorque latestData = new SpeedAndTorque(0,0);

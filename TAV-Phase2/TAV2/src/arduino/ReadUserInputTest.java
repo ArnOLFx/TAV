@@ -31,58 +31,8 @@ public class ReadUserInputTest {
 		
 		in = new Scanner(System.in);
 	}
-	
-	/**
-	 * TDD test case
-	 * Checks if input torque value is correctly displayed.
-	 */
-	@Test
-	public void tdd1() {
-		double expected = 0.5;
-		System.out.print("\nEnter torque value (0.5): ");
-		double actual = input.getUserInputTorque(in.nextLine());
-		Assert.assertEquals(expected, actual, 0);
-	}
-	
-	/**
-	 * TDD test case
-	 * Checks if input ultra value is correctly displayed.
-	 */
-	@Test
-	public void tdd2() {
-		double expected = 5;
-		System.out.print("\nEnter ultra value (5): ");
-		double actual = input.getUserInputUltra(in.nextLine());
-		Assert.assertEquals(expected, actual, 0);
-	}
-	
-	/**
-	 * TDD test case
-	 * Checks if input ir value is correctly displayed.
-	 */
-	@Test
-	public void tdd3() {
-		double expected = 5;
-		System.out.print("\nEnter ir value (5): ");
-		double actual = input.getUserInputIr(in.nextLine());
-		Assert.assertEquals(expected, actual, 0);
-	}
-	
-	/**
-	 * TDD test case
-	 * Checks if input torque value out of range is correctly ignored.
-	 */
-	@Test
-	public void tdd4() {
-		double expected = 99.0;
-		System.out.print("\nEnter torque value (5): ");
-		double actual = input.getUserInputTorque(in.nextLine());
-		Assert.assertEquals(expected, actual, 0);
-	}
 
-	
 	/**
-	 * Scenario: Send normal data
 	 * Test case 1: reads data from user and tests if the output is equal to the input
 	 * In this case we look for torque (the string starts with "t" for torque)
 	 */
@@ -95,10 +45,18 @@ public class ReadUserInputTest {
 		display.setTorque(Double.parseDouble(in.nextLine()));
 		
 		when(display.getTorque()).thenReturn(0.5);
+		
+		/* WHAT WE HAD BEFORE MOCKITO
+		double expected = 0.5;
+		
+		System.out.print("\nEnter torque value (0.5): ");
+		
+		double actual = input.getUserInputTorque(in.nextLine());
+		
+		Assert.assertEquals(expected, actual, 0);*/
 	}
 	
 	/**
-	 * Scenario: Send normal data
 	 * Test case 2: reads data from user and tests if the output is equal to the input
 	 * In this case we look for ultraDistance (the string starts with "u" for "ultra")
 	 */
@@ -111,11 +69,18 @@ public class ReadUserInputTest {
 		
 		when(display.getUltra()).thenReturn(5.0);
 		
+		/* BEFORE MOCKITO
+		double expected = 5;
 		
+		System.out.print("\nEnter ultra value (5): ");
+		
+		double actual = input.getUserInputUltra(in.nextLine());
+		
+		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**
-	 * Scenario: Send normal data
 	 * Test case 3: reads data from user and tests if the output is equal to the input
 	 * In this case we look for irDistance (the string starts with "i" for "ir")
 	 */
@@ -127,24 +92,44 @@ public class ReadUserInputTest {
 		display.setIr(Double.parseDouble(in.nextLine()));
 		
 		when(display.getIr()).thenReturn(5.0);
+		
+		/* BEFORE MOCKITO
+		double expected = 5;
+		
+		System.out.print("\nEnter ir value (5): ");
+		
+		double actual = input.getUserInputIr(in.nextLine());
+		
+		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**
-	 * Scenario: Send out of range data
-	 * Test case 4: reads data from user and tests if the output is equal to the input
+	 * Test case 3: reads data from user and tests if the output is equal to the input
 	 * In this case we look for torque and if it is in bounds
 	 */
 	@Test
 	public void test4() {
 					//torque
 		System.out.print("\nEnter torque value (5): ");
+		
 		display.setTorque(Double.parseDouble(in.nextLine()));
+		
 		when(display.getTorque()).thenReturn(5.0);
+		
+		/* BEFORE MOCKITO
+		double expected = 99.0;
+		
+		System.out.print("\nEnter torque value (5): ");
+		
+		double actual = input.getUserInputTorque(in.nextLine());
+		
+		Assert.assertEquals(expected, actual, 0);
+		*/
 	}
 	
 	/**
-	 * Scenario: Send out of range data
-	 * Test case 5: reads data from user and tests if the output is equal to the input
+	 * Test case 3: reads data from user and tests if the output is equal to the input
 	 * In this case we look for ultraDistance and if it is in bounds
 	 */
 	@Test
@@ -160,8 +145,7 @@ public class ReadUserInputTest {
 	}
 	
 	/**
-	 * Scenario: Send out of range data
-	 * Test case 6: reads data from user and tests if the output is equal to the input
+	 * Test case 3: reads data from user and tests if the output is equal to the input
 	 * In this case we look for irDistance and if it is in bounds
 	 */
 	@Test
@@ -176,4 +160,13 @@ public class ReadUserInputTest {
 		Assert.assertEquals(expected, actual, 0);
 	}
 	
+	/**
+	 * Test case 3: reads data from user and tests if the output is equal to the input
+	 * In this case we look for irDistance and if it is in bounds
+	 */
+	@Test
+	public void test7() {
+					//ir
+		//Assert.assertEquals(5, actual)
+	}
 }

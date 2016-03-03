@@ -27,16 +27,10 @@ public class UserInterface {
 	public JTextField ISent;
 	public JTextField TRec;
 	public JTextField SRec;
-<<<<<<< HEAD
 	private JTextField InputT;
 	private JTextField InputU;
 	private JTextField InputI;
 	private JButton b;
-=======
-	JTextField InputT;
-	JTextField InputU;
-	JTextField InputI;
->>>>>>> 0602a53f1e48a2c4259f10ff25f2a35c7ae1133b
 
 	/**
 	 * Launch the application.
